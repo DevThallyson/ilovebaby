@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FAST | Criar conta</title>
+  <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <main class="pagina">
+    <section class="painel">
+      <div class="caixa">
+        <div class="logo">
+          <!-- Se tiver o logo em imagem: <img src="../img/logo.png" alt="FAST Gôndolas & Check-outs"> -->
+          <div class="marca">FAST</div>
+          <small>Gôndolas &amp; Check-outs</small>
+        </div>
+
+        <h1>Crie sua conta</h1>
+
+        <form id="form-cadastro" novalidate>
+          <div class="campo">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" autocomplete="name">
+            <span class="erro-campo">Informe seu nome.</span>
+          </div>
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" autocomplete="email">
+            <span class="erro-campo">Informe um e-mail válido.</span>
+          </div>
+          <div class="campo">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" autocomplete="tel">
+            <span class="erro-campo">Informe DDD e número.</span>
+          </div>
+          <div class="campo">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" autocomplete="organization">
+            <span class="erro-campo">Informe a empresa.</span>
+          </div>
+          <div class="campo">
+            <label for="cnpj">CNPJ</label>
+            <input type="text" id="cnpj">
+            <span class="erro-campo">O CNPJ deve ter 14 dígitos.</span>
+          </div>
+          <div class="campo">
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" autocomplete="new-password">
+            <span class="erro-campo">Use pelo menos 6 caracteres.</span>
+          </div>
+          <div class="campo">
+            <label for="confirmar">Confirmar senha</label>
+            <input type="password" id="confirmar" autocomplete="new-password">
+            <span class="erro-campo">As senhas não são iguais.</span>
+          </div>
+
+          <div id="msg" class="mensagem" role="alert"></div>
+          <button type="submit" class="btn">Cadastrar</button>
+        </form>
+
+        <p class="troca">Já tem conta? <a href="../login/login.html">Fazer login</a></p>
+      </div>
+    </section>
+    <aside class="arte" aria-hidden="true"></aside>
+  </main>
+  <script src="cadastro.js"></script>
+</body>
+</html>

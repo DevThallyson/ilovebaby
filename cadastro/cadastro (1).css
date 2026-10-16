@@ -1,0 +1,70 @@
+/* ===== TELA DE CADASTRO ===== */
+:root {
+  --fundo: #e3ebf7;
+  --azul-titulo: #1d4a80;
+  --azul-botao: #0f3e6b;
+  --campo-fundo: #eef3fb;
+  --campo-borda: #b8c8de;
+  --texto: #1d2b3a;
+  --erro: #b3261e;
+  --sucesso: #1b7a3d;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body { font-family: "Segoe UI", Roboto, Arial, sans-serif; color: var(--texto); background: var(--fundo); }
+
+.pagina { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+
+/* Lado esquerdo */
+.painel { background: var(--fundo); display: flex; align-items: center; justify-content: center; padding: 28px 24px; }
+.caixa { width: 100%; max-width: 330px; display: flex; flex-direction: column; align-items: center; }
+
+.logo { text-align: center; line-height: 1; margin-bottom: 14px; }
+.logo .marca { font-size: 2.8rem; font-weight: 900; font-style: italic; letter-spacing: -2px; color: var(--azul-titulo); }
+.logo small { display: block; margin-top: 2px; font-size: .68rem; font-style: italic; color: var(--azul-titulo); }
+.logo img { max-width: 180px; display: block; margin: 0 auto; }
+
+h1 { font-size: 1.35rem; font-weight: 500; color: var(--azul-titulo); margin-bottom: 14px; text-align: center; }
+
+form { width: 100%; display: flex; flex-direction: column; gap: 9px; }
+
+/* Campos mais simples, com borda fina, como no protótipo */
+.campo { position: relative; }
+.campo label { position: absolute; top: 5px; left: 11px; font-size: .6rem; color: var(--azul-titulo); pointer-events: none; }
+.campo input {
+  width: 100%; height: 42px; padding: 17px 11px 3px; font-size: .9rem;
+  background: var(--campo-fundo); color: var(--texto);
+  border: 1px solid var(--campo-borda); border-radius: 6px;
+}
+.campo input:focus { outline: 2px solid var(--azul-titulo); outline-offset: 1px; background: #fff; }
+.campo input.invalido { border-color: var(--erro); }
+
+.erro-campo { display: none; font-size: .68rem; color: var(--erro); margin-top: 2px; }
+.campo input.invalido ~ .erro-campo { display: block; }
+
+.btn {
+  align-self: center; width: 52%; margin-top: 8px; padding: 10px;
+  background: var(--azul-botao); color: #fff; border: 0; border-radius: 7px;
+  font-size: .9rem; font-weight: 600; cursor: pointer;
+}
+.btn:hover { background: #0a2f54; }
+.btn:disabled { opacity: .6; cursor: wait; }
+.btn:focus-visible { outline: 3px solid #7fa8d4; outline-offset: 2px; }
+
+.mensagem { display: none; font-size: .82rem; text-align: center; padding: 9px; border-radius: 8px; }
+.mensagem.erro { display: block; background: #fbe9e7; color: var(--erro); }
+.mensagem.ok { display: block; background: #e3f4e8; color: var(--sucesso); }
+
+.troca { margin-top: 14px; font-size: .8rem; text-align: center; }
+.troca a { color: var(--azul-titulo); font-weight: 600; }
+
+/* Lado direito: salve a ilustração em fast/img/fundo.png */
+.arte {
+  background: url("../img/fundo.png") center / cover no-repeat,
+              linear-gradient(180deg, #7fb3d9 0%, #e9b27a 55%, #b5532e 100%);
+}
+
+@media (max-width: 800px) {
+  .pagina { grid-template-columns: 1fr; }
+  .arte { display: none; }
+}
