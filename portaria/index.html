@@ -4,84 +4,162 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Portaria 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/painel.css">
 <link rel="stylesheet" href="css/cadastro.css">
 </head>
 <body>
 
-<header>
-  <div class="avatar">👤</div>
-  <div><strong>Olá Matheus</strong><small>Portaria 1</small></div>
-  <div class="search hidden" id="search"><input type="text" id="busca" placeholder="Pesquisar cargas e motoristas..."></div>
+<!-- Ícones (sprite SVG) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-caminhao" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+  <symbol id="i-usuario" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></symbol>
+  <symbol id="i-busca" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-alerta" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></symbol>
+  <symbol id="i-entrada" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></symbol>
+  <symbol id="i-mais" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+  <symbol id="i-prancheta" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></symbol>
+  <symbol id="i-voltar" viewBox="0 0 24 24"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></symbol>
+</svg>
+
+<header class="cabecalho">
+  <div class="barra-topo">
+    <div class="avatar"><svg class="icone"><use href="#i-usuario"/></svg></div>
+    <div class="identidade"><strong>Olá, Matheus</strong><span>Portaria 1</span></div>
+    <div class="busca escondido" id="areaBusca">
+      <svg class="icone"><use href="#i-busca"/></svg>
+      <input type="text" id="busca" placeholder="Pesquisar por placa ou motorista" aria-label="Pesquisar por placa ou motorista">
+    </div>
+    <div class="relogio"><strong id="relogioHora">--:--</strong><span id="relogioData"></span></div>
+  </div>
 </header>
 
-<!-- TELA 1: DASHBOARD -->
-<main id="viewDash">
-  <section class="stats">
-    <div class="stat"><div class="ic" style="background:#e3edff">🚚</div><b id="nPatio" style="color:var(--orange)">0</b><span>Caminhões no pátio</span></div>
-    <div class="stat"><div class="ic" style="background:#dcf5e5">⬇</div><b id="nHoje" style="color:var(--green)">0</b><span>Entradas hoje</span></div>
-    <div class="stat"><div class="ic" style="background:#fde2dd">⚠</div><b id="nAtencao" style="color:#e0452f">0</b><span>Precisam de atenção</span></div>
+<!-- TELA 1: PAINEL -->
+<main id="telaPainel">
+  <section class="resumo" aria-label="Resumo do pátio">
+    <div class="indicador">
+      <span class="icone-caixa azul"><svg class="icone"><use href="#i-caminhao"/></svg></span>
+      <div><b id="qtdPatio">0</b><span>Caminhões no pátio</span></div>
+    </div>
+    <div class="indicador">
+      <span class="icone-caixa verde"><svg class="icone"><use href="#i-entrada"/></svg></span>
+      <div><b id="qtdHoje">0</b><span>Entradas hoje</span></div>
+    </div>
+    <div class="indicador" id="indicadorAtencao">
+      <span class="icone-caixa vermelho"><svg class="icone"><use href="#i-alerta"/></svg></span>
+      <div><b id="qtdAtencao">0</b><span>Precisam de atenção</span></div>
+    </div>
   </section>
 
-  <div class="top">
-    <h2>Motoristas</h2>
-    <button class="btn btn-primary" id="btnCadastrar">+ Cadastrar motorista</button>
+  <div class="cabecalho-pagina">
+    <div>
+      <h1>Motoristas</h1>
+      <p>Acompanhe quem está no pátio e libere as saídas.</p>
+    </div>
+    <button class="botao botao-primario" id="btnCadastrar">
+      <svg class="icone"><use href="#i-mais"/></svg>Cadastrar motorista
+    </button>
   </div>
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-f="todos">Todos</button>
-    <button class="tab" data-f="patio">No pátio agora</button>
-    <button class="tab" data-f="chegando">Chegando</button>
-    <button class="tab" data-f="saiu">Já saíram</button>
+
+  <div class="abas" id="abas" role="tablist">
+    <button class="aba ativa" data-filtro="todos" role="tab">Todos<span class="contagem" id="contTodos">0</span></button>
+    <button class="aba" data-filtro="patio" role="tab">No pátio agora<span class="contagem" id="contPatio">0</span></button>
+    <button class="aba" data-filtro="saiu" role="tab">Já saíram<span class="contagem" id="contSaiu">0</span></button>
   </div>
-  <div id="lista"></div>
+
+  <div class="fila">
+    <div class="fila-cab"><span>Veículo e motorista</span><span>Situação</span><span>Tempo de espera</span><span></span></div>
+    <div id="listaMotoristas"></div>
+  </div>
 </main>
 
 <!-- TELA 2: CADASTRO -->
-<main id="viewCadastro" class="hidden">
-  <button class="back" id="btnVoltar">← Voltar ao painel</button>
+<main id="telaCadastro" class="escondido">
+  <div class="cabecalho-pagina">
+    <div>
+      <h1>Cadastrar motorista</h1>
+      <p>Preencha os dados e conclua o checklist para liberar a entrada.</p>
+    </div>
+    <button class="botao botao-contorno" id="btnVoltar">
+      <svg class="icone"><use href="#i-voltar"/></svg>Voltar ao painel
+    </button>
+  </div>
+
   <div class="layout">
     <div>
-      <div class="panel">
-        <h3>👤 Dados do motorista</h3>
-        <div class="grid">
-          <div><label>Nome completo <i>*</i></label><input type="text" id="nome" placeholder="Ex.: Carlos Silva Santos"></div>
-          <div><label>CPF <i>*</i></label><input type="text" id="cpf" maxlength="14" placeholder="000.000.000-00"></div>
-          <div><label>CNH <i>*</i></label><input type="text" id="cnh" maxlength="11" placeholder="11 dígitos"></div>
-          <div><label>Categoria</label>
-            <select id="cat"><option>A</option><option>B</option><option>C</option><option>D</option><option selected>E</option></select></div>
-          <div><label>Placa <i>*</i></label><input type="text" id="placa" maxlength="7" placeholder="ABC1D23"></div>
+      <section class="painel">
+        <div class="painel-cab"><svg class="icone"><use href="#i-usuario"/></svg>Dados do motorista</div>
+        <div class="painel-corpo grade">
+          <div class="campo" id="campo-nome">
+            <label for="nome">Nome completo <i>*</i></label>
+            <input type="text" id="nome" autocomplete="off" placeholder="Ex.: Carlos Silva Santos">
+            <span class="erro" id="erro-nome"></span>
+          </div>
+          <div class="campo" id="campo-cpf">
+            <label for="cpf">CPF <i>*</i></label>
+            <input type="text" id="cpf" inputmode="numeric" maxlength="14" placeholder="000.000.000-00">
+            <span class="erro" id="erro-cpf"></span>
+          </div>
+          <div class="campo" id="campo-cnh">
+            <label for="cnh">CNH <i>*</i></label>
+            <input type="text" id="cnh" inputmode="numeric" maxlength="11" placeholder="11 dígitos">
+            <span class="erro" id="erro-cnh"></span>
+          </div>
+          <div class="campo">
+            <label for="categoria">Categoria</label>
+            <select id="categoria"><option>A</option><option>B</option><option>C</option><option>D</option><option selected>E</option></select>
+          </div>
+          <div class="campo" id="campo-placa">
+            <label for="placa">Placa do veículo <i>*</i></label>
+            <input type="text" id="placa" autocomplete="off" maxlength="7" placeholder="ABC1D23">
+            <span class="erro" id="erro-placa"></span>
+          </div>
         </div>
-      </div>
-      <div class="panel">
-        <h3>✓ Checklist de segurança</h3>
-        <label class="check"><input type="checkbox" class="ck"><span class="box"></span><span><b>EPIs conferidos</b><small>Capacete, colete e botas de segurança</small></span></label>
-        <label class="check"><input type="checkbox" class="ck"><span class="box"></span><span><b>Lacre da carga verificado</b><small>Número confere com a nota fiscal</small></span></label>
-        <label class="check"><input type="checkbox" class="ck"><span class="box"></span><span><b>Vistoria do veículo realizada</b><small>Pneus, luzes e fitas inspecionados</small></span></label>
-      </div>
+      </section>
+
+      <section class="painel">
+        <div class="painel-cab"><svg class="icone"><use href="#i-prancheta"/></svg>Checklist de segurança<span class="contador" id="contChecklist">0 de 3</span></div>
+        <div class="painel-corpo sem-padding">
+          <label class="item-checklist"><input type="checkbox" class="marcador"><span class="caixa"></span><span><b>EPIs conferidos</b><small>Capacete, colete e botas de segurança</small></span></label>
+          <label class="item-checklist"><input type="checkbox" class="marcador"><span class="caixa"></span><span><b>Lacre da carga verificado</b><small>Número confere com a nota fiscal</small></span></label>
+          <label class="item-checklist"><input type="checkbox" class="marcador"><span class="caixa"></span><span><b>Vistoria do veículo realizada</b><small>Pneus, luzes e fitas inspecionados</small></span></label>
+        </div>
+      </section>
     </div>
-    <aside>
-      <div class="panel sum">
-        <h3>Resumo da carga</h3>
-        <div class="l">Placa <b id="sPlaca">—</b></div>
-        <div class="l">Doca <b>—</b></div>
-        <div class="l">Tipo <b>—</b></div>
-        <hr>
-        <div class="l">Chegada <b id="sCheg">—</b></div>
-        <div class="l">Liberação prevista <b id="sPrev">—</b></div>
-      </div>
-      <div class="panel sum">
-        <button class="btn" id="btnLiberar" disabled>Liberar motorista</button>
-        <p id="hint">Conclua o checklist para liberar a saída</p>
-      </div>
+
+    <aside class="lateral">
+      <section class="painel">
+        <div class="painel-cab">Resumo da entrada</div>
+        <dl class="resumo-lista">
+          <div><dt>Placa</dt><dd id="resPlaca">—</dd></div>
+          <div><dt>Motorista</dt><dd id="resNome">—</dd></div>
+          <div><dt>Categoria</dt><dd id="resCategoria">E</dd></div>
+          <div><dt>Chegada</dt><dd id="resChegada">—</dd></div>
+        </dl>
+      </section>
+      <section class="painel painel-acao">
+        <button class="botao botao-ok botao-bloco" id="btnLiberar" disabled>Liberar motorista</button>
+        <p id="dicaLiberar">Conclua o checklist para liberar a entrada</p>
+      </section>
     </aside>
   </div>
 </main>
 
-<!-- A ordem importa: scripts compartilham variáveis globais -->
-<script src="js/state.js"></script>
-<script src="js/dashboard.js"></script>
+<dialog id="dialogoDetalhes">
+  <h2 id="detalhesTitulo"></h2>
+  <dl class="resumo-lista" id="detalhesLista"></dl>
+  <form method="dialog"><button class="botao botao-contorno">Fechar</button></form>
+</dialog>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+<!-- A ordem importa: os scripts compartilham variáveis globais -->
+<script src="js/estado.js"></script>
+<script src="js/painel.js"></script>
 <script src="js/cadastro.js"></script>
-<script src="js/main.js"></script>
+<script src="js/principal.js"></script>
 </body>
 </html>
