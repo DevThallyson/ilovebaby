@@ -1,0 +1,32 @@
+/* tela 2: cadastro do motorista */
+.voltar{background:none;border:0;color:#cfe0f0;cursor:pointer;font-size:13px;margin-bottom:14px}
+.layout{display:grid;grid-template-columns:1fr 210px;gap:16px;align-items:start}
+.cartao{background:#fff;border-radius:8px;padding:16px 18px;margin-bottom:14px}
+.cartao h3{display:flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.4px;text-transform:uppercase;color:#0b4d7a;margin-bottom:12px}
+.grade{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+label{display:block;font-size:11px;color:#555;margin-bottom:4px}
+label i{color:var(--vermelho);font-style:normal}
+.campo input,.campo select{width:100%;padding:9px 10px;font-size:13px;background:#f3f5f8;border:1px solid var(--linha);border-radius:6px;outline:none}
+.campo input:focus,.campo select:focus{border-color:#0b4d7a}
+.campo.invalido input{border-color:var(--vermelho)}
+.erro{display:block;margin-top:3px;font-size:11px;color:var(--vermelho)}
+
+.item-checklist{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--linha);cursor:pointer}
+.item-checklist:last-child{border:0}
+.marcador{position:absolute;opacity:0}
+.caixa{width:16px;height:16px;border:1px solid #bbb;border-radius:3px;flex:none;margin-top:1px;display:grid;place-items:center;color:#fff;font-size:11px}
+.marcador:checked+.caixa{background:var(--verde);border-color:var(--verde)}
+.marcador:checked+.caixa::after{content:"✓"}
+.item-checklist b{display:block;font-size:12px;font-weight:500}
+.item-checklist small{font-size:10px;color:var(--cinza)}
+
+.resumo h3{color:#444}
+.linha-resumo{display:flex;justify-content:space-between;gap:8px;font-size:11px;padding:4px 0;color:var(--cinza)}
+.linha-resumo b{color:#111;text-align:right}
+.resumo hr{border:0;border-top:1px solid var(--linha);margin:6px 0}
+.botao-liberar{width:100%;padding:10px;border:0;border-radius:6px;font-size:13px;font-weight:600;background:#cfd5dd;color:#fff;cursor:not-allowed}
+.botao-liberar:not(:disabled){background:var(--verde);cursor:pointer}
+.resumo p{font-size:10px;color:var(--cinza);text-align:center;margin-top:6px}
+
+@media(max-width:760px){.layout,.grade{grid-template-columns:1fr}}
