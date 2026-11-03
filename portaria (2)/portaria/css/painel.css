@@ -1,0 +1,27 @@
+/* tela 1: painel */
+.indicadores{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-bottom:34px}
+.indicador{background:var(--escuro);color:#fff;border-radius:10px;width:140px;padding:14px;text-align:center}
+.icone-indicador{width:24px;height:24px;border-radius:6px;margin:0 auto 6px;display:grid;place-items:center;font-size:14px}
+.indicador b{display:block;font-size:30px;line-height:1.1}
+.indicador span{font-size:13px}
+
+.titulo-lista{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;color:#fff}
+.titulo-lista h2{font-size:14px;font-weight:600}
+
+.filtros{display:flex;gap:8px;margin-bottom:14px}
+.filtro{background:#fff;border:0;border-radius:5px;padding:6px 14px;font-size:12px;cursor:pointer;color:#333}
+.filtro.ativo{background:#0b4d7a;color:#fff;outline:2px solid #fff}
+
+.linha{background:#fff;border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.linha.alerta{background:#fff6f4}
+.icone-linha{width:30px;height:30px;border-radius:7px;background:#e6eef8;color:#2f6fd6;display:grid;place-items:center}
+.alerta .icone-linha{background:#fbd9d3;color:var(--vermelho)}
+.info b{display:block;font-size:14px}
+.info span{font-size:11px;color:var(--cinza)}
+.tempo{margin-left:auto;text-align:right;font-size:13px;font-weight:700}
+.tempo small{display:block;font-size:9px;font-weight:400;color:var(--cinza)}
+.alerta .tempo{color:var(--vermelho)}
+.acao{min-width:76px;text-align:right}
+
+.vazio{color:#cfe0f0;text-align:center;padding:40px 20px;font-size:14px}
+.vazio p{margin-bottom:14px}
